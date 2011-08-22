@@ -42,10 +42,10 @@ expression:
   | expression MINUS  expression      { Minus ($1, $3) }
   | expression DIVIDE expression      { Divide ($1, $3) }
   | MINUS expression %prec UMINUS     { Negate $2 }
-	| STRING { String $1 }
-	| expression CONCATENATION expression { Concatenation ($1, $3) }
-	| BOOLEAN { Boolean $1 }
-	| expression OR expression { Or ($1, $3) }
-	| expression AND expression { And ($1, $3) }
+  | STRING { String $1 }
+  | expression CONCATENATION expression { Concatenation ($1, $3) }
+  | BOOLEAN { Boolean $1 }
+  | expression OR expression { Or ($1, $3) }
+  | expression AND expression { And ($1, $3) }
   | LPAREN expression RPAREN          { $2 }
 ;
