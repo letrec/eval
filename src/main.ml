@@ -7,14 +7,14 @@ let error () = failwith "Typing error"
 let rec to_int e =
   let e' = eval e in
   match e' with
-    | Int i -> i
-    | _ -> error ()
+  | Int i -> i
+  | _ -> error ()
 
 and to_string e =
   let e' = eval e in
   match e' with
-    | Str s -> s
-    | _ -> error ()
+  | Str s -> s
+  | _ -> error ()
 
 and eval e =
   match e with
@@ -53,7 +53,7 @@ let main =
         let s = value_to_string v in
         print_endline s
       with
-      |  Failure str -> print_endline str
+      | Failure str -> print_endline str
       | Parsing.Parse_error -> print_endline "Syntax error."
     done
   with
