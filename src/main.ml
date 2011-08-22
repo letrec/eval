@@ -4,19 +4,7 @@ let (|>) a f = f a
 
 let error () = failwith "Typing error."
 
-let rec to_int e =
-  let e' = eval e in
-  match e' with
-  | Int i -> i
-  | _ -> error ()
-
-and to_string e =
-  let e' = eval e in
-  match e' with
-  | Str s -> s
-  | _ -> error ()
-
-and eval e =
+let rec eval e =
   match e with
   | Boolean b -> Bool b
   | Or (Boolean x, Boolean y) -> Bool (x || y)
@@ -41,6 +29,19 @@ and eval e =
   | Concatenation (x, y) -> Str ((to_string x) ^ (to_string y))
   | _ -> error ()
 
+and to_int e =
+  let e' = eval e in
+  match e' with
+  | Int i -> i
+  | _ -> error ()
+
+and to_string e =
+  let e' = eval e in
+  match e' with
+  | Str s -> s
+  | _ -> error ()
+
+
 let main =
   
   try
@@ -49,9 +50,7 @@ let main =
       let str = read_line () in
       try
         let e = Parser.toplevel Lexer.lexeme (Lexing.from_string str) in
-        let v = eval e in
-        let s = value_to_string v in
-        print_endline s
+        e |> eval |> value_to_string |> print_endline
       with
       | Failure str -> print_endline str
       | Parsing.Parse_error -> print_endline "Syntax error."
