@@ -2,7 +2,7 @@ open Syntax
 
 let (|>) a f = f a
 
-let error () = failwith "Typing error"
+let error () = failwith "Typing error."
 
 let rec to_int e =
   let e' = eval e in
