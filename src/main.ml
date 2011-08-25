@@ -22,7 +22,8 @@ let rec eval e =
   | Divide (Numeral x, Numeral y) -> Int (x / y)
   | Divide (Numeral x, y) -> Int (x / (to_int y))
   | Divide (x, y) -> Int ((to_int x) / (to_int y))
-  | Negate (Numeral x) -> Int (- x)
+  | Negate (Numeral x) -> Int (-x)
+	| Negate x -> Int (-(to_int x))
   | String s -> Str s
   | Concatenation (String x, String y) -> Str (x ^ y)
   | Concatenation (String x, y) -> Str (x ^ (to_string y))
